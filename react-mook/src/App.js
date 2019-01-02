@@ -5,6 +5,15 @@ import Auth from './Auth'
 import Dashboard from './Dashboard'
 import Reducers from './reducers' 
 import {connect} from 'react-redux'
+import {createStore,applyMiddleware,compose} from 'redux'
+import thunk from 'redux-thunk'
+import { devToolsEnhancer } from 'redux-devtools-extension/logOnlyInProduction';
+
+const reduxDevtools = window.__REDUX_DEVTOOLS_EXTENSION__?window.__REDUX_DEVTOOLS_EXTENSION__:()=>{}
+const store = create(Auth,compose(
+  applyMiddleware(thunk),
+  reduxDevtools
+))
 
 @connect{
   state => state.auth,
